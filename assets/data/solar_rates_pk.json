@@ -1,0 +1,37 @@
+{
+  "lastUpdated": "April 2026",
+  "source": "Bundled fallback rates (Pakistan retail benchmark)",
+  "sourceUrl": "assets/data/solar_rates_pk.json",
+  "brands": {
+    "Budget (JA + Growatt + Narada)": {
+      "solar_panels": 28500,
+      "inverter": 108000,
+      "hybrid_inverter": 182000,
+      "battery": 26500,
+      "charge_controller": 30500,
+      "wiring": 130,
+      "monitoring": 15500,
+      "grid_synchronizer": 13800
+    },
+    "Standard (Longi + Inverex + Pylontech)": {
+      "solar_panels": 32900,
+      "inverter": 142000,
+      "hybrid_inverter": 218000,
+      "battery": 31500,
+      "charge_controller": 40500,
+      "wiring": 160,
+      "monitoring": 20500,
+      "grid_synchronizer": 18800
+    },
+    "Premium (Jinko N-Type + Fronius + BYD)": {
+      "solar_panels": 38900,
+      "inverter": 202000,
+      "hybrid_inverter": 292000,
+      "battery": 41200,
+      "charge_controller": 53500,
+      "wiring": 208,
+      "monitoring": 30200,
+      "grid_synchronizer": 24900
+    }
+  }
+}
