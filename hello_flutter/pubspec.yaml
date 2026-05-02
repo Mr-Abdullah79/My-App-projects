@@ -1,0 +1,31 @@
+name: hello_flutter
+description: A simple Hello World Flutter starter app.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The rules are intended to be followed
+  # by Flutter projects.
+  flutter_lints: ^3.0.0
+
+# For information on the semantics of the pubspec.yaml file, read the full
+# pubspec.yaml documentation linked to from
+# https://flutter.dev/to/pubspec-yaml-docs
+flutter:
+  uses-material-design: true
