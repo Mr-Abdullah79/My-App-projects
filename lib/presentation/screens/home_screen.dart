@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../main.dart';
 import 'appliances_selection_screen.dart';
+import 'package:semester_project_app/services/auth_service.dart';
+import 'login_screen.dart';
 import 'history_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,6 +10,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (context, themeMode, _) {
@@ -33,6 +36,19 @@ class HomeScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (_) => const HistoryScreen()),
                   );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.logout_rounded),
+                tooltip: 'Sign Out',
+                onPressed: () async {
+                  await AuthService().signOut();
+                  if (context.mounted) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => const LoginScreen()),
+                      (route) => false,
+                    );
+                  }
                 },
               ),
             ],
