@@ -5,12 +5,14 @@ class BillGenerationScreen extends StatefulWidget {
   final double totalUnits;
   final int days;
   final List<String> selectedAppliances;
+  final List<Color> themeGradient;
 
   const BillGenerationScreen({
     super.key,
     required this.totalUnits,
     required this.days,
     required this.selectedAppliances,
+    required this.themeGradient,
   });
 
   @override
@@ -197,6 +199,7 @@ class _BillGenerationScreenState extends State<BillGenerationScreen> {
           duty: duty,
           gstPercent: gstPercent,
           tvFee: tvFee,
+          themeGradient: widget.themeGradient,
         ),
       ),
     );
@@ -271,6 +274,8 @@ class _BillGenerationScreenState extends State<BillGenerationScreen> {
           'Taxes & Rates',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        backgroundColor: widget.themeGradient[1],
+        foregroundColor: Colors.white,
         elevation: 0,
       ),
       body: Container(
@@ -286,15 +291,15 @@ class _BillGenerationScreenState extends State<BillGenerationScreen> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.blue.withAlpha(50),
+                    color: widget.themeGradient[1].withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.blue.withAlpha(100)),
+                    border: Border.all(color: widget.themeGradient[1].withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.info_outline,
-                        color: Colors.lightBlueAccent,
+                        color: widget.themeGradient[1],
                         size: 28,
                       ),
                       const SizedBox(width: 12),
@@ -493,7 +498,7 @@ class _BillGenerationScreenState extends State<BillGenerationScreen> {
                   child: ElevatedButton(
                     onPressed: _navigateToGeneratedBill,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orangeAccent,
+                      backgroundColor: widget.themeGradient[1],
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),

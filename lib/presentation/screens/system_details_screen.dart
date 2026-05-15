@@ -10,6 +10,7 @@ class SystemDetailsScreen extends StatefulWidget {
   final List<String> selectedAppliances;
   final double currentMonthlyBill;
   final double currentYearlyBill;
+  final List<Color> themeGradient;
 
   const SystemDetailsScreen({
     super.key,
@@ -18,6 +19,7 @@ class SystemDetailsScreen extends StatefulWidget {
     required this.selectedAppliances,
     required this.currentMonthlyBill,
     required this.currentYearlyBill,
+    required this.themeGradient,
   });
 
   @override
@@ -677,11 +679,15 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/solar_bg.png'),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black87, BlendMode.darken),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              widget.themeGradient[0].withValues(alpha: 0.8),
+              widget.themeGradient[1].withValues(alpha: 0.9),
+              widget.themeGradient[1],
+            ],
           ),
         ),
         child: SafeArea(
@@ -694,10 +700,10 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent.withOpacity(0.2),
+                    color: Colors.blueAccent.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: Colors.blueAccent.withOpacity(0.5),
+                      color: Colors.blueAccent.withValues(alpha: 0.5),
                     ),
                   ),
                   child: Column(
@@ -750,9 +756,9 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: Colors.white.withOpacity(0.12)),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -833,7 +839,7 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white,
                             side: BorderSide(
-                              color: Colors.white.withOpacity(0.35),
+                              color: Colors.white.withValues(alpha: 0.35),
                             ),
                           ),
                         ),
@@ -847,9 +853,9 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: Colors.white.withOpacity(0.12)),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -867,10 +873,10 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.blueAccent.withOpacity(0.15),
+                          color: Colors.blueAccent.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: Colors.blueAccent.withOpacity(0.35),
+                            color: Colors.blueAccent.withValues(alpha: 0.35),
                           ),
                         ),
                         child: const Column(
@@ -905,7 +911,7 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                         style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.05),
+                          fillColor: Colors.white.withValues(alpha: 0.05),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
@@ -941,7 +947,7 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                           labelText: 'Live Rates API URL (JSON)',
                           labelStyle: const TextStyle(color: Colors.white70),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.05),
+                          fillColor: Colors.white.withValues(alpha: 0.05),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
@@ -1028,9 +1034,9 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                     vertical: 16,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.white.withOpacity(0.12)),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1143,9 +1149,9 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.08),
+        color: Colors.white.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1156,7 +1162,7 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.2),
+                  color: Colors.blue.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(equipment.icon, color: Colors.blue, size: 28),
@@ -1212,7 +1218,7 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.withOpacity(0.6),
+                      backgroundColor: Colors.red.withValues(alpha: 0.6),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
                         vertical: 8,
@@ -1231,7 +1237,7 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
                   const SizedBox(width: 8),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green.withOpacity(0.6),
+                      backgroundColor: Colors.green.withValues(alpha: 0.6),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
                         vertical: 8,
@@ -1261,7 +1267,7 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
               prefixText: 'Rs. ',
               prefixStyle: const TextStyle(color: Colors.white70),
               filled: true,
-              fillColor: Colors.white.withOpacity(0.06),
+              fillColor: Colors.white.withValues(alpha: 0.06),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -1287,9 +1293,9 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.1),
+              color: Colors.green.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.green.withOpacity(0.3)),
+              border: Border.all(color: Colors.green.withValues(alpha: 0.3)),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1317,9 +1323,9 @@ class _SystemDetailsScreenState extends State<SystemDetailsScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.orange.withOpacity(0.1),
+              color: Colors.orange.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.orange.withOpacity(0.3)),
+              border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,

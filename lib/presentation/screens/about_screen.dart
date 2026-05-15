@@ -43,7 +43,7 @@ class AboutScreen extends StatelessWidget {
                 fontSize: 16,
                 color: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.color?.withOpacity(0.7),
+                ).textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
                 height: 1.5,
               ),
             ),
@@ -52,9 +52,9 @@ class AboutScreen extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.08),
+                color: Colors.orange.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: Colors.orange.withOpacity(0.25)),
+                border: Border.all(color: Colors.orange.withValues(alpha: 0.25)),
               ),
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

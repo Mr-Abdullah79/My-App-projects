@@ -4,7 +4,8 @@ import 'appliance_usage_screen.dart';
 
 class AppliancesSelectionScreen extends StatefulWidget {
   final String propertyType;
-  const AppliancesSelectionScreen({super.key, required this.propertyType});
+  final List<Color> themeGradient;
+  const AppliancesSelectionScreen({super.key, required this.propertyType, required this.themeGradient});
 
   @override
   State<AppliancesSelectionScreen> createState() =>
@@ -109,7 +110,7 @@ class _AppliancesSelectionScreenState extends State<AppliancesSelectionScreen> {
       context,
       MaterialPageRoute(
         builder: (context) =>
-            ApplianceUsageScreen(selectedAppliances: selectedAppliances),
+            ApplianceUsageScreen(selectedAppliances: selectedAppliances, themeGradient: widget.themeGradient),
       ),
     );
   }
@@ -120,7 +121,7 @@ class _AppliancesSelectionScreenState extends State<AppliancesSelectionScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Appliances: ${widget.propertyType}'),
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: widget.themeGradient[1],
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -128,7 +129,7 @@ class _AppliancesSelectionScreenState extends State<AppliancesSelectionScreen> {
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            color: Colors.orange.withOpacity(0.1),
+            color: widget.themeGradient[1].withValues(alpha: 0.1),
             child: Row(
               children: [
                 Expanded(
@@ -147,7 +148,7 @@ class _AppliancesSelectionScreenState extends State<AppliancesSelectionScreen> {
                   icon: const Icon(Icons.add),
                   label: const Text('Add'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orangeAccent,
+                    backgroundColor: widget.themeGradient[1],
                     foregroundColor: Colors.white,
                   ),
                 ),
@@ -161,6 +162,7 @@ class _AppliancesSelectionScreenState extends State<AppliancesSelectionScreen> {
                 final app = _appliances[index];
                 return CustomCheckboxTile(
                   appliance: app,
+                  themeColor: widget.themeGradient[1],
                   onChanged: (val) {
                     setState(() {
                       app.isSelected = val ?? false;
@@ -182,7 +184,7 @@ class _AppliancesSelectionScreenState extends State<AppliancesSelectionScreen> {
         child: ElevatedButton(
           onPressed: _onNext,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.orangeAccent,
+            backgroundColor: widget.themeGradient[1],
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -204,12 +206,14 @@ class _AppliancesSelectionScreenState extends State<AppliancesSelectionScreen> {
 
 class CustomCheckboxTile extends StatelessWidget {
   final ApplianceModel appliance;
+  final Color themeColor;
   final ValueChanged<bool?> onChanged;
   final ValueChanged<int> onQuantityChanged;
 
   const CustomCheckboxTile({
     super.key,
     required this.appliance,
+    required this.themeColor,
     required this.onChanged,
     required this.onQuantityChanged,
   });
@@ -220,11 +224,11 @@ class CustomCheckboxTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
         color: appliance.isSelected
-            ? Colors.orange.withOpacity(0.1)
+            ? themeColor.withValues(alpha: 0.1)
             : Theme.of(context).cardColor,
         border: Border.all(
           color: appliance.isSelected
-              ? Colors.orange
+              ? themeColor
               : Theme.of(context).dividerColor,
         ),
         borderRadius: BorderRadius.circular(12),
@@ -232,15 +236,15 @@ class CustomCheckboxTile extends StatelessWidget {
       child: Column(
         children: [
           CheckboxListTile(
-            activeColor: Colors.orangeAccent,
+            activeColor: themeColor,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 8,
             ),
             secondary: CircleAvatar(
               backgroundColor: appliance.isSelected
-                  ? Colors.orange
-                  : Colors.grey.withOpacity(0.2),
+                  ? themeColor
+                  : Colors.grey.withValues(alpha: 0.2),
               child: Icon(
                 appliance.icon,
                 color: appliance.isSelected ? Colors.white : Colors.grey[600],
@@ -269,7 +273,7 @@ class CustomCheckboxTile extends StatelessWidget {
                     fontSize: 12,
                     color: Theme.of(
                       context,
-                    ).textTheme.bodySmall?.color?.withOpacity(0.7),
+                    ).textTheme.bodySmall?.color?.withValues(alpha: 0.7),
                   ),
                 ),
               ),
@@ -285,9 +289,9 @@ class CustomCheckboxTile extends StatelessWidget {
                   ),
                   const Spacer(),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.remove_circle_outline,
-                      color: Colors.orangeAccent,
+                      color: themeColor,
                     ),
                     onPressed: appliance.quantity > 1
                         ? () => onQuantityChanged(appliance.quantity - 1)
@@ -301,9 +305,9 @@ class CustomCheckboxTile extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.add_circle_outline,
-                      color: Colors.orangeAccent,
+                      color: themeColor,
                     ),
                     onPressed: () => onQuantityChanged(appliance.quantity + 1),
                   ),

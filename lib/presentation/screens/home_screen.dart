@@ -36,10 +36,14 @@ class HomeScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/solar_bg.png'),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF0F2027),
+              Color(0xFF203A43),
+              Color(0xFF2C5364),
+            ],
           ),
         ),
         child: SafeArea(
@@ -79,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       ValueListenableBuilder<ThemeMode>(
                         valueListenable: themeNotifier,
-                        builder: (_, mode, __) {
+                        builder: (context, mode, child) {
                           bool isDark = mode == ThemeMode.dark;
                           return Container(
                             decoration: const BoxDecoration(
@@ -129,16 +133,16 @@ class HomeScreen extends StatelessWidget {
 
                 GridView.count(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, // Reduced padding to make boxes smaller
-                    vertical: 4.0,
+                    horizontal: 24.0, // Increased padding to make boxes smaller
+                    vertical: 8.0,
                   ),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 3,
-                  crossAxisSpacing: 16, // Better spacing for smaller cards
-                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 20, // Better spacing for smaller cards
+                  mainAxisSpacing: 20,
                   childAspectRatio:
-                      0.95, // Slightly taller so titles fit well within smaller width
+                      0.85, // Adjust aspect ratio to fit smaller width
                   children: [
                     _buildPropertyCard(
                       context,
@@ -239,7 +243,7 @@ class HomeScreen extends StatelessWidget {
                   margin: const EdgeInsets.all(24),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.white30),
                   ),
@@ -299,8 +303,10 @@ class HomeScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  AppliancesSelectionScreen(propertyType: propertyType),
+              builder: (context) => AppliancesSelectionScreen(
+                propertyType: propertyType,
+                themeGradient: gradient,
+              ),
             ),
           );
         },
@@ -310,17 +316,17 @@ class HomeScreen extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                gradient[0].withOpacity(0.85),
-                gradient[1].withOpacity(0.85),
+                gradient[0].withValues(alpha: 0.85),
+                gradient[1].withValues(alpha: 0.85),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.2)),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
             boxShadow: [
               BoxShadow(
-                color: gradient[1].withOpacity(0.4),
+                color: gradient[1].withValues(alpha: 0.4),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -332,7 +338,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, size: 24, color: Colors.white),
@@ -365,16 +371,16 @@ class HomeScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.15)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
+              color: color.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(icon, color: color, size: 30),

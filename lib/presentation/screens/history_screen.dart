@@ -28,8 +28,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
     });
   }
 
-  Future<void> _deleteAt(int index) async {
-    await HistoryStorageService.deleteAt(index);
+  Future<void> _deleteById(String documentId) async {
+    await HistoryStorageService.deleteById(documentId);
     await _load();
   }
 
@@ -61,7 +61,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           : ListView.separated(
               padding: const EdgeInsets.all(16),
               itemCount: _entries.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemBuilder: (context, index) {
                 final e = _entries[index];
                 final appliances = (e['appliances'] as List?)
@@ -91,7 +91,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () => _deleteAt(index),
+                            onPressed: () => _deleteById(e['id']),
                             icon: const Icon(Icons.delete_outline),
                           ),
                         ],

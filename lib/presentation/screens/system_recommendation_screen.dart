@@ -6,6 +6,7 @@ class SystemRecommendationScreen extends StatefulWidget {
   final List<String> selectedAppliances;
   final double estimatedMonthlyBill;
   final double estimatedYearlyBill;
+  final List<Color> themeGradient;
 
   const SystemRecommendationScreen({
     super.key,
@@ -13,6 +14,7 @@ class SystemRecommendationScreen extends StatefulWidget {
     required this.selectedAppliances,
     required this.estimatedMonthlyBill,
     required this.estimatedYearlyBill,
+    required this.themeGradient,
   });
 
   @override
@@ -59,11 +61,15 @@ class _SystemRecommendationScreenState
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/solar_bg.png'),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black87, BlendMode.darken),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              widget.themeGradient[0].withValues(alpha: 0.8),
+              widget.themeGradient[1].withValues(alpha: 0.9),
+              widget.themeGradient[1],
+            ],
           ),
         ),
         child: SafeArea(
@@ -76,10 +82,10 @@ class _SystemRecommendationScreenState
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent.withOpacity(0.2),
+                    color: Colors.blueAccent.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: Colors.blueAccent.withOpacity(0.5),
+                      color: Colors.blueAccent.withValues(alpha: 0.5),
                     ),
                   ),
                   child: Column(
@@ -161,7 +167,7 @@ class _SystemRecommendationScreenState
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orangeAccent,
+                      backgroundColor: widget.themeGradient[1],
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -177,6 +183,7 @@ class _SystemRecommendationScreenState
                             selectedAppliances: widget.selectedAppliances,
                             currentMonthlyBill: widget.estimatedMonthlyBill,
                             currentYearlyBill: widget.estimatedYearlyBill,
+                            themeGradient: widget.themeGradient,
                           ),
                         ),
                       );
@@ -218,11 +225,11 @@ class _SystemRecommendationScreenState
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: isSelected
-              ? color.withOpacity(0.2)
-              : Colors.white.withOpacity(0.05),
+              ? color.withValues(alpha: 0.2)
+              : Colors.white.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? color : Colors.white.withOpacity(0.1),
+            color: isSelected ? color : Colors.white.withValues(alpha: 0.1),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -232,7 +239,7 @@ class _SystemRecommendationScreenState
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.2),
+                color: color.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 30),

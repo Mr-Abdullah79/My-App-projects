@@ -37,7 +37,7 @@ class ContactScreen extends StatelessWidget {
                 fontSize: 15,
                 color: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.color?.withOpacity(0.7),
+                ).textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
               ),
             ),
             const SizedBox(height: 30),

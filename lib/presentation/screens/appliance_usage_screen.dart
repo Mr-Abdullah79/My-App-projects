@@ -1,11 +1,13 @@
+// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import '../../models/appliance_model.dart';
 import 'bill_generation_screen.dart';
 
 class ApplianceUsageScreen extends StatefulWidget {
   final List<ApplianceModel> selectedAppliances;
+  final List<Color> themeGradient;
 
-  const ApplianceUsageScreen({super.key, required this.selectedAppliances});
+  const ApplianceUsageScreen({super.key, required this.selectedAppliances, required this.themeGradient});
 
   @override
   State<ApplianceUsageScreen> createState() => _ApplianceUsageScreenState();
@@ -45,7 +47,7 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Daily Usage Time'),
-        backgroundColor: Colors.teal,
+        backgroundColor: widget.themeGradient[1],
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -81,7 +83,7 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
           color: Theme.of(context).cardColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, -5),
             ),
@@ -100,7 +102,7 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
                       Radio<bool>(
                         value: true,
                         groupValue: _isMonthly,
-                        activeColor: Colors.teal,
+                        activeColor: widget.themeGradient[1],
                         onChanged: (val) => setState(() => _isMonthly = val!),
                       ),
                       const Text('Monthly (30 Days)'),
@@ -108,7 +110,7 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
                       Radio<bool>(
                         value: false,
                         groupValue: _isMonthly,
-                        activeColor: Colors.teal,
+                        activeColor: widget.themeGradient[1],
                         onChanged: (val) => setState(() => _isMonthly = val!),
                       ),
                       const Text('Specific Days'),
@@ -147,10 +149,10 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
                 ),
                 Text(
                   '${totalUnits.toStringAsFixed(1)} Units',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
-                    color: Colors.teal,
+                    color: widget.themeGradient[1],
                   ),
                 ),
               ],
@@ -162,7 +164,7 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
                 fontSize: 12,
                 color: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.color?.withOpacity(0.7),
+                ).textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
               ),
             ),
             const SizedBox(height: 16),
@@ -184,12 +186,13 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
                         totalUnits: totalUnits,
                         days: activeDays,
                         selectedAppliances: applianceNames,
+                        themeGradient: widget.themeGradient,
                       ),
                     ),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
+                  backgroundColor: widget.themeGradient[1],
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -220,7 +223,7 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -231,7 +234,7 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
         children: [
           Row(
             children: [
-              Icon(app.icon, color: Colors.teal),
+              Icon(app.icon, color: widget.themeGradient[1]),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -245,10 +248,10 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
               ),
               Text(
                 '${app.hoursPerDay} hrs/day',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: Colors.teal,
+                  color: widget.themeGradient[1],
                 ),
               ),
             ],
@@ -267,8 +270,8 @@ class _ApplianceUsageScreenState extends State<ApplianceUsageScreen> {
             min: 0,
             max: 24,
             divisions: 24,
-            activeColor: Colors.teal,
-            inactiveColor: Colors.teal[100],
+            activeColor: widget.themeGradient[1],
+            inactiveColor: widget.themeGradient[1].withValues(alpha: 0.3),
             label: '${app.hoursPerDay} hrs',
             onChanged: (val) {
               setState(() {
