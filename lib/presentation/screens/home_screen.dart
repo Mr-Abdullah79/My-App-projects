@@ -10,14 +10,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    return ValueListenableBuilder<ThemeMode>(
-      valueListenable: themeNotifier,
-      builder: (context, themeMode, _) {
-        bool isDarkMode = themeMode == ThemeMode.dark;
-        
-        return Scaffold(
-          backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
+    return Scaffold(
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
           appBar: AppBar(
             title: const Text(
               'Solar installation app by Mr Abdullah',
@@ -92,28 +88,22 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          ValueListenableBuilder<ThemeMode>(
-                            valueListenable: themeNotifier,
-                            builder: (context, mode, child) {
-                              bool isDark = mode == ThemeMode.dark;
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color: isDark ? Colors.white24 : Colors.grey[300],
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  icon: Icon(
-                                    isDark ? Icons.light_mode : Icons.dark_mode,
-                                    color: isDark ? Colors.white : Colors.blueGrey,
-                                  ),
-                                  onPressed: () {
-                                    themeNotifier.value = isDark
-                                        ? ThemeMode.light
-                                        : ThemeMode.dark;
-                                  },
-                                ),
-                              );
-                            },
+                          Container(
+                            decoration: BoxDecoration(
+                              color: isDarkMode ? Colors.white24 : Colors.grey[300],
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                                color: isDarkMode ? Colors.white : Colors.blueGrey,
+                              ),
+                              onPressed: () {
+                                themeNotifier.value = isDarkMode
+                                    ? ThemeMode.light
+                                    : ThemeMode.dark;
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -311,8 +301,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         );
-        },
-      );
   }
 
   Widget _buildPropertyCard(
